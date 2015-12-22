@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+google.load('visualization', '1', {packages: ['corechart', 'bar']});
+google.setOnLoadCallback(drawBasic);
+
+function drawBasic() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Truth of statement', 'Number of statements'],
+        ['True', 0],
+        ['Mostly True', 5],
+        ['Half True', 13],
+        ['Mostly False', 11],
+        ['False', 29],
+        ['Pants on Fire', 16]
+      ]);
+
+      var options = {
+        title: 'Truth of 74 Trump statements analysed by Politifact.com',
+        chartArea: {width: '50%'},
+        hAxis: {textColor: 'white'}, 
+        dataOpacity: 0.6,
+        series: { 0: {color: 'red'} },
+        tooltip: { isHtml: true }, 
+
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+    }
+    </script>
+  </head>
+
+
+
+
+
+
+
+
+  <body>
+    <div id="chart_div"></div>
+  </body>
+</html>
