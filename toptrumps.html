@@ -1,42 +1,174 @@
-# groupdataviz
-<!DOCTYPE html>
 <html>
 <head>
     <title>Trump O' Meter</title>
     <link type="text/css" rel="stylesheet" href="http://igor.gold.ac.uk/~tprat001/code/js/uikit-2.24.0/css/uikit.almost-flat.min.css" />
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/uikit-2.24.0/js/uikit.min.js"></script>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    <style>
+    #map { top:0; bottom:0; width:100%; height:439;}
+    </style>
+        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
 </head>
 <body>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    
+<img src="trumpbanner.png" alt="trump banner" style="padding: 0px 130px 40px 130px">
     <div class="uk-container uk-container-center uk-margin-top">
          <ul class="uk-grid" data-uk-grid-margin>
-            <li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-4">
+            <li class="uk-width-small-1-1 uk-width-medium-1-1 uk-width-large-3-5">
+                <div class="uk-panel uk-panel-box uk-responsive-height">
+                    <div id='map'></div>
+
+                    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+
+    <script>
+      function main() {
+        cartodb.createVis('map', 'https://oliverater.cartodb.com/api/v2/viz/1a474856-a334-11e5-b058-0e98b61680bf/viz.json', {
+            shareable: true,
+            title: true,
+            description: true,
+            search: true,
+            tiles_loader: true,
+            center_lat: 0,
+            center_lon: 0,
+            zoom: 2
+        })
+        .done(function(vis, layers) {
+          // layer 0 is the base layer, layer 1 is cartodb layer
+          // setInteraction is disabled by default
+          layers[1].setInteraction(true);
+          layers[1].on('featureOver', function(e, latlng, pos, data) {
+            cartodb.log.log(e, latlng, pos, data);
+          });
+          // you can get the native map to work with it
+          var map = vis.getNativeMap();
+          // now, perform any operations you need
+          // map.setZoom(3);
+          // map.panTo([50.5, 30.5]);
+        })
+        .error(function(err) {
+          console.log(err);
+        });
+      }
+      window.onload = main;
+    </script>
+                                 
+            </li>
+            <li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-2-5">
                 <div class="uk-panel uk-panel-box">
-                    <h1>Panel 1</h1>
-                    <iframe class="uk-responsive-width" width="300" height="300" frameborder="0" scrolling="no" src="https://plot.ly/~tprater/193.embed"></iframe>
+                    <h3>Trumpin'</h3>
+                    <div class="twitter">
+                    <a class="twitter-timeline" width="100%" height="400" frameborder="0" href="https://twitter.com/realDonaldTrump" data-widget-id="676791969763500032">Tweets by @realDonaldTrump</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+                    </script>
+                    </div>
                 </div> 
             </li>
-            <li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-4">
+            <li class="uk-width-small-1-1 uk-width-medium-1-1 uk-width-large-4-5">
                 <div class="uk-panel uk-panel-box">
-                    <h1>Panel 2</h1>
-                    <p>some content</p>
+                    <h3>Panel 2</h3>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+google.load('visualization', '1', {packages: ['corechart', 'bar']});
+google.setOnLoadCallback(drawBasic);
+
+function drawBasic() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Truth of statement', 'Number of statements'],
+        ['True', 0],
+        ['Mostly True', 5],
+        ['Half True', 13],
+        ['Mostly False', 11],
+        ['False', 29],
+        ['Pants on Fire', 16]
+      ]);
+
+      var options = {
+        title: 'Truth of 74 Trump statements analysed by Politifact.com',
+        chartArea: {width: '50%'},
+        hAxis: {textColor: 'white'}, 
+        dataOpacity: 0.6,
+        series: { 0: {color: 'red'} },
+        tooltip: { isHtml: true }, 
+
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+      $(window).resize(function(){
+        drawBasic();
+})
+    };
+    </script>
+    <div id="chart_div"></div>
                 </div> 
             </li>
-            <li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-4">
+            <li class="uk-width-small-1-1 uk-width-medium-1-4 uk-width-large-1-5">
                 <div class="uk-panel uk-panel-box">
-                    <h1>Panel 3</h1>
-                    <p>some content</p>
+                    <h4>Today's style</h4>
+                     <script>
+                      images = 17;
+                      number = Math.floor(Math.random(1) * images) + 1;
+                      document.write("<img src=\"image" + number + ".jpg\"/>");
+
+                    </script>
+            <noscript>
+              <img src="backupimage.jpeg"/>
+            </noscript>
                 </div> 
             </li>
-            <li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-4">
+          <li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-2">
+        <div class="uk-panel uk-panel-box">
+            <div style="align:center";></div>
+                <h2><strong>The Illuminati is as real as my hair!</strong></h2>
+                    <img src="Donald.gif">
+                      <div id= "all" >
+              <div id= "bar" ></div>
+              <div id= "likes" ></div>
+              <div id= "dislikes" ></div>
+
+              <input type= "button" value="Like" onclick="like();"/>
+              <input type= "button" value="Dislike" onclick="dislike();"/>
+              </div>
+              </div>                
+          </li>
+
+<script type="text/javascript">
+
+var likes=0, dislikes=0;
+function like(){
+  likes++;
+  calculateBar(); 
+}
+
+function dislike(){
+  dislikes++;
+  calculateBar(); 
+}
+
+function calculateBar(){
+  var total= likes+dislikes;
+  var percentageLikes=(likes/total)*100;
+  var percentageDislikes=(dislikes/total)*100;
+
+  document.getElementById('likes').style.width=percentageLikes.toString()+"%";
+  document.getElementById('dislikes').style.width=percentageDislikes.toString()+"%";
+}
+
+calculateBar();
+
+</script>
+<li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-2">
                 <div class="uk-panel uk-panel-box">
-                    <h1>Panel 4</h1>
-                    <p>some content</p>
-                </div> 
-            </li>
+                    <h3>Trump graph</h3>
+<iframe width="100%" height="300px" frameborder="0" scrolling="no" src="https://plot.ly/~MikeBolajidc52/50.embed"></iframe>
         </ul> 
     </div>
-    
-
 </body>
 </html>
