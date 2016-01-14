@@ -37,13 +37,16 @@
    }
     #map { top:0; bottom:0; width:100%; height:439;}
     </style>
+
+    <link rel=stylesheet type="text/css" href="style.css">
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
 <body>
 <div class="uk-container uk-container-center uk-margin-top">
          <ul class="uk-grid" data-uk-grid-margin>
          <li class="uk-width-small-2-5 uk-width-medium-2-5 uk-width-large-2-5 uk-grid-small">
-                <div class="uk-panel uk-panel-box uk-responsive-height" style="background-color:red; border-width:1px">
-         <img src="trumpbanner.png" alt="trump banner">
+                <div class="uk-panel uk-panel-box uk-responsive-height" style="border-width:1px">
+         <img src="trump-banner.svg" alt="trump banner">
   <div class="container-banner">
   <div class="container-sub-header">
     <div class="sub-header">
@@ -122,7 +125,6 @@ function drawBasic() {
         series: { 0: {color: 'red'} },
         tooltip: { isHtml: true }, 
         legend: {position: 'none'},
-
       };
       var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
       chart.draw(data, options);
@@ -133,9 +135,57 @@ function drawBasic() {
     </script>
 
     <div id="chart_div"></div>
+    <div id="chart1_div"></div>
+
                 </div> 
             </li>
-            <href="http://www.igor.gold.ac.uk/~tprat001/code/trumptreemap.html"></href>
+                <script type="text/javascript">
+      google.load("visualization", "1", {packages:["treemap"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Location', 'Parent', '% Small donations', 'Total contributions (color)'],
+          ['Republican Candidates | Size = total campaign contributions | Colour = % of small donations',    null,     0,       0],
+          ['Ben Carson',   'Republican Candidates | Size = total campaign contributions | Colour = % of small donations',             74,       31.3],
+          ['Donald Trump',    'Republican Candidates | Size = total campaign contributions | Colour = % of small donations',             72,    4],
+          ['Rand Paul',      'Republican Candidates | Size = total campaign contributions | Colour = % of small donations',             65,      7.8],
+          ['Carly Fiorina', 'Republican Candidates | Size = total campaign contributions | Colour = % of small donations',             53,        8.5],
+          ['Ted Cruz', 'Republican Candidates | Size = total campaign contributions | Colour = % of small donations',                45,         26.3],
+          ['Mike Huckabee', 'Republican Candidates | Size = total campaign contributions | Colour = % of small donations',            42,          3.2],
+          ['Marco Rubio',   'Republican Candidates | Size = total campaign contributions | Colour = % of small donations',            27,         14.4],
+          ['Rick Santorum', 'Republican Candidates | Size = total campaign contributions | Colour = % of small donations',            23,           1],
+          ['Bobby Jindal',    'Republican Candidates | Size = total campaign contributions | Colour = % of small donations',          12,            1.2]
+
+
+        ]);
+
+        tree = new google.visualization.TreeMap(document.getElementById('chart1_div'));
+
+        tree.draw(data, {
+          minColor: '#ff9999',
+          midColor: '#ff4d4d',
+          maxColor: '#b30000',
+          headerHeight: 30,
+          headerColor: 'white',
+          fontColor: 'black',
+          fontSize: 20,
+          showScale: true,
+          generateTooltip: showFullTooltip
+        });
+
+          tree.draw(data, options);
+
+  function showFullTooltip(row, size, value) {
+    return '<div style="background: #ffe5e5; padding:10px; border-style:solid">' +
+           '<span style="font-family:Arial"><b>' + data.getValue(row, 0) + '<br>' + '</b>Percentage of small donations: ' + data.getValue(row, 2) +
+           '%' + '<br>' + 'Total campaign contributions: $' + data.getValue(row, 3) + 'million' + '</span><br>' ;
+  }
+
+}
+
+
+    </script>
+
             <li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-2 uk-grid-small">
                 <div class="uk-panel uk-panel-box uk-grid-collapse">
                     <h1>Trump pics</h1>
@@ -143,7 +193,6 @@ function drawBasic() {
                       images = 17;
                       number = Math.floor(Math.random(1) * images) + 1;
                       document.write("<img src=\"image" + number + ".jpg\"/>");
-
                     </script>
             <noscript>
               <img src="backupimage.jpeg"/>
@@ -167,34 +216,26 @@ function drawBasic() {
           </li>
 
 <script type="text/javascript">
-
 var likes=0, dislikes=0;
 function like(){
   likes++;
   calculateBar(); 
 }
-
 function dislike(){
   dislikes++;
   calculateBar(); 
 }
-
 function calculateBar(){
   var total= likes+dislikes;
   var percentageLikes=(likes/total)*100;
   var percentageDislikes=(dislikes/total)*100;
-
   document.getElementById('likes').style.width=percentageLikes.toString()+"%";
   document.getElementById('dislikes').style.width=percentageDislikes.toString()+"%";
 }
-
 calculateBar();
-
 </script>
 </li>
         </ul> 
     </div>
-    
-
-</body>
-</html>
+    </body>
+    </html>
