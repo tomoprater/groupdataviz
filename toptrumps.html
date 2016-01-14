@@ -4,22 +4,54 @@
     <link type="text/css" rel="stylesheet" href="http://igor.gold.ac.uk/~tprat001/code/js/uikit-2.24.0/css/uikit.almost-flat.min.css" />
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/uikit-2.24.0/js/uikit.min.js"></script>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-
-    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet' />
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
     <style>
+    .container-banner{
+      position:relative;
+      width:368px;
+      height:60px;
+      padding-bottom: 20px;
+    }
+    .container-sub-header{
+      position:relative;
+      width: 368px;
+      height:50px;
+      /*border-color: #ff00ff;
+      border-width: 1px;
+      border-style: solid;*/
+      /*padding-left: 58px;*/
+  }
+    
+    .sub-header h4{
+      font-family: helvetica;
+      max-width:268px;
+      font-size: 13px;
+      margin-left:20px;
+      margin-right:20px;
+      text-align: left;
+      padding-bottom: 20px;
+      /*padding: 3px;*/
+   }
     #map { top:0; bottom:0; width:100%; height:439;}
     </style>
-        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
 </head>
 <body>
-<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    
-<img src="trumpbanner.png" alt="trump banner" style="padding: 0px 130px 40px 130px">
-    <div class="uk-container uk-container-center uk-margin-top">
+<div class="uk-container uk-container-center uk-margin-top">
          <ul class="uk-grid" data-uk-grid-margin>
-            <li class="uk-width-small-1-1 uk-width-medium-1-1 uk-width-large-3-5">
-                <div class="uk-panel uk-panel-box uk-responsive-height">
+         <li class="uk-width-small-2-5 uk-width-medium-2-5 uk-width-large-2-5 uk-grid-small">
+                <div class="uk-panel uk-panel-box uk-responsive-height" style="background-color:red; border-width:1px">
+         <img src="trumpbanner.png" alt="trump banner">
+  <div class="container-banner">
+  <div class="container-sub-header">
+    <div class="sub-header">
+      <h4 style="padding-top=20px">Bringing you the latest strategic defensives and arsenal against Donald Trump</h4>
+      <iframe width="100%" height="250" frameborder="0" scrolling="no" src="https://plot.ly/~MikeBolajidc52/50.embed"></iframe>
+        </div>
+            <li class="uk-width-small-3-5 uk-width-medium-3-5 uk-width-large-3-5 uk-grid-small">
+                <div class="uk-panel uk-panel-box uk-responsive-height" style="background-color:red; border-width:0px; height:450px">
                     <div id='map'></div>
 
                     <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
@@ -57,9 +89,8 @@
     </script>
                                  
             </li>
-            <li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-2-5">
-                <div class="uk-panel uk-panel-box">
-                    <h3>Trumpin'</h3>
+            <li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-2-5 uk-grid-small">
+                <div class="uk-panel uk-panel-box" style="background-color:red; border-width:1px">
                     <div class="twitter">
                     <a class="twitter-timeline" width="100%" height="400" frameborder="0" href="https://twitter.com/realDonaldTrump" data-widget-id="676791969763500032">Tweets by @realDonaldTrump</a>
                     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
@@ -67,17 +98,13 @@
                     </div>
                 </div> 
             </li>
-            <li class="uk-width-small-1-1 uk-width-medium-1-1 uk-width-large-4-5">
-                <div class="uk-panel uk-panel-box">
-                    <h3>Panel 2</h3>
+            <li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-3-5 uk-grid-small">
+                <div class="uk-panel uk-panel-box" style="background-color:red; padding-right:80px; margin-border:0px">
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-
 google.load('visualization', '1', {packages: ['corechart', 'bar']});
 google.setOnLoadCallback(drawBasic);
-
 function drawBasic() {
-
       var data = google.visualization.arrayToDataTable([
         ['Truth of statement', 'Number of statements'],
         ['True', 0],
@@ -87,7 +114,6 @@ function drawBasic() {
         ['False', 29],
         ['Pants on Fire', 16]
       ]);
-
       var options = {
         title: 'Truth of 74 Trump statements analysed by Politifact.com',
         chartArea: {width: '50%'},
@@ -95,23 +121,24 @@ function drawBasic() {
         dataOpacity: 0.6,
         series: { 0: {color: 'red'} },
         tooltip: { isHtml: true }, 
+        legend: {position: 'none'},
 
       };
-
       var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-
       chart.draw(data, options);
       $(window).resize(function(){
         drawBasic();
 })
     };
     </script>
+
     <div id="chart_div"></div>
                 </div> 
             </li>
-            <li class="uk-width-small-1-1 uk-width-medium-1-4 uk-width-large-1-5">
-                <div class="uk-panel uk-panel-box">
-                    <h4>Today's style</h4>
+            <href="http://www.igor.gold.ac.uk/~tprat001/code/trumptreemap.html"></href>
+            <li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-2 uk-grid-small">
+                <div class="uk-panel uk-panel-box uk-grid-collapse">
+                    <h1>Trump pics</h1>
                      <script>
                       images = 17;
                       number = Math.floor(Math.random(1) * images) + 1;
@@ -123,7 +150,7 @@ function drawBasic() {
             </noscript>
                 </div> 
             </li>
-          <li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-2">
+            <li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-2 uk-grid-small">
         <div class="uk-panel uk-panel-box">
             <div style="align:center";></div>
                 <h2><strong>The Illuminati is as real as my hair!</strong></h2>
@@ -164,11 +191,10 @@ function calculateBar(){
 calculateBar();
 
 </script>
-<li class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-2">
-                <div class="uk-panel uk-panel-box">
-                    <h3>Trump graph</h3>
-<iframe width="100%" height="300px" frameborder="0" scrolling="no" src="https://plot.ly/~MikeBolajidc52/50.embed"></iframe>
+</li>
         </ul> 
     </div>
+    
+
 </body>
 </html>
